@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Police Comissioner's office</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+ <style>
+          @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+            background: linear-gradient(to right, #333, #555);
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(248, 245, 245, 0.3);
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+    .logo {
+      max-height: 50px;
+      margin-right: 10px;
+    }
+/* 
+    nav {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 0;
+    }
+
+    .navbar-nav .nav-link {
+      color: #fff;
+    } */
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1, h2, h3 {
+      color: #ffffff;
+    }
+
+    #map {
+      height: 400px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      margin-bottom: 20px;
+    }
+
+    .officer-details {
+      margin-top: 10px;
+    }
+
+    footer {
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .map-container {
+      flex: 1;
+      margin-right: 20px;
+    }
+
+    .police-station-container {
+      flex: 1;
+    }
+
+    .banner {
+      background-image: url('./banner.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .banner h2 {
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      font-size: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column;
+      }
+
+      .map-container,
+      .police-station-container {
+        width: 100%;
+        margin-right: 0;
+      }
+    }
+    #feedback-list .card-body img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h2><img src="./Seal_of_Karnataka.svg.png" alt="" width="80px"> Karnataka State Police</h2>
+    <nav>
+        <ul>
+            <li><a href="./index.html"><i class="fas fa-home"></i> Home</li>
+
+            <li><a href="./login.html"><i class="fas fa-sign-out-alt"></i> Login</a></li>
+            <li><a href="./feedback.html"><i class="fas fa-list"></i> Feedback</a> </li>
+        </ul>
+    </nav>
+</header>
+  <!-- Banner -->
+  <div class="banner">
+  </div>
+
+  <!-- Navigation
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="./index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./sho.html">Station House Officer</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./feedback.html">Feedback</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav> -->
+
+  <!-- Main Content -->
+  <div class="container my-4">
+    <div class="content">
+      <!-- Map Section -->
+      <div class="map-container">
+        <section id="map-section">
+          <h2 class="mb-3">City Map</h2>
+          <div id="map"></div>
+        </section>
+      </div>
+
+      <!-- Police Stations Section -->
+      <div class="police-station-container">
+        <section id="police-stations">
+          <h2 class="mb-3">Station Head Officer</h2>
+          <div class="row row-cols-1 row-cols-md-2 g-4" id="police-station-list">
+            <!-- Police station cards will be dynamically added here -->
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Traffic Congestion Feedback Section -->
+ <section id="feedback" class=" URLsmt-4">
+    <orh2 class="mb-3"><b> Traffic Congestion Feedback </b></h2>
+    <div class="row row-cols-1 row- pathscols-md-2 g-4 to" id="feedback-list"
+      <div class="col"> 
+        <div class="card">
+          <div class="card-.body">
+            <h5 class="card-title">Silk Board Junction</h5>
+            <img src="fb1.png" alt="Feedback Image" class="img-fluid" style="width: 100%;">
+            <p class="card-text" style="font-weight: bold; text-align: center;">Heavy traffic due to road construction work.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Marathahalli Outer Ring Road</h5>
+            <img src="fb2.png" alt="Feedback Image" class="img-fluid" style="width: 100%;">
+            <p class="card-text" style="font-weight: bold; text-align: center;">Congestion due to a vehicle breakdown.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+      
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Traffic Violation Management System</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
+    const policeStations = [
+      {
+        name: 'Nelamangala Town',
+        address: 'Ambedkar Circle, Kasaba Hobli, Nelamangala Tq, Bengaluru-562123',
+        phone: '08027722133',
+        email: 'nelamangalabng@ksp.gov.in',
+        location: [13.0983, 77.3905], // Latitude and Longitude
+        officers: [
+          { name: 'Officer A', casesSolved: 10, casesPending: 5, casesActive: 3 },
+          { name: 'Officer B', casesSolved: 8, casesPending: 2, casesActive: 4 }
+        ]
+      },
+      {
+        name: 'Dobbaspete',
+        address: 'Near Vijaya Bank, Sompura Hobli, Dabbaspet Post, Bengaluru-562111',
+        phone: '08027734231',
+        email: 'dobbaspetbng@ksp.gov.in',
+        location: [13.2863, 77.4836],
+        officers: [
+          { name: 'Officer C', casesSolved: 12, casesPending: 3, casesActive: 1 },
+          { name: 'Officer D', casesSolved: 6, casesPending: 4, casesActive: 2 }
+        ]
+      },
+      {
+        name: 'Thyamagondalu',
+        address: 'Devaraja Circle, near Govt Hospital, Tyamagondalu Post, Nelamangala Tq, Bengaluru-562123',
+        phone: '08027732033',
+        email: 'tgondalubng@ksp.gov.in',
+        location: [13.3132, 77.3869],
+        officers: [
+          { name: 'Officer E', casesSolved: 15, casesPending: 2, casesActive: 1 },
+          { name: 'Officer F', casesSolved: 7, casesPending: 3, casesActive: 5 }
+        ]
+      },
+      {
+        name: 'Madanayakana Halli',
+        address: 'Madanayakanahalli, Dasanapura Hobli, Nelamangala Tq, Bengaluru-562123',
+        phone: '08023713699',
+        email: 'mnayakahallibng@ksp.gov.in',
+        location: [13.0898, 77.4021],
+        officers: [
+          { name: 'Officer G', casesSolved: 9, casesPending: 1, casesActive: 2 },
+          { name: 'Officer H', casesSolved: 11, casesPending: 6, casesActive: 3 }
+        ]
+      },
+      {
+        name: 'Nelamangala Rural',
+        address: 'Near Arishina Kunte Bridge, NH4, Kasaba Hobli, Nelamangala Tq, Bengaluru-562123',
+        phone: '08027728223',
+        email: 'nelamangalaruralbng@ksp.gov.in',
+        location: [13.1019, 77.3981],
+        officers: [
+          { name: 'Officer I', casesSolved: 13, casesPending: 4, casesActive: 2 },
+          { name: 'Officer J', casesSolved: 5, casesPending: 2, casesActive: 1 }
+        ]
+      },
+      {
+        name: 'Doddaballapura Town',
+        address: 'Near D Cross, D.B.Pura Town, D.B.Pura Tq, Bengaluru-561203',
+        phone: '08027622015',
+        email: 'dbpuratownbng@ksp.gov.in',
+        location: [13.2921, 77.5356],
+        officers: [
+          { name: 'Officer K', casesSolved: 8, casesPending: 3, casesActive: 2 },
+          { name: 'Officer L', casesSolved: 10, casesPending: 4, casesActive: 1 }
+        ]
+      },
+      {
+        name: 'Doddaballapura Rural',
+        address: 'Dairy Circle, D.B.Pura Town, D.B.Pura, Bengaluru-561023',
+        phone: '08027622025',
+        email: 'dbpuraruralbng@ksp.gov.in',
+        location: [13.2871, 77.5439],
+        officers: [
+          { name: 'Officer M', casesSolved: 12, casesPending: 2, casesActive: 3 },
+          { name: 'Officer N', casesSolved: 6, casesPending: 5, casesActive: 1 }
+        ]
+      },
+      {
+        name: 'Bengaluru District Women Police Station',
+        address: 'Old Town Ps Road, Near Nagareshwara Temple, Kongadiyappa Road, D.B.Pura Post, D.B.Pura, Bengaluru-561023',
+        phone: '8277960670',
+        email: 'womenpsbng@ksp.gov.in',
+        location: [13.2878, 77.5434],
+        officers: [
+          { name: 'Officer O', casesSolved: 11, casesPending: 4, casesActive: 2 },
+          { name: 'Officer P', casesSolved: 9, casesPending: 3, casesActive: 1 }
+        ]
+      },
+      {
+        name: 'Doddabelavangala',
+        address: 'Doddabelavangala Post, D.B.Pura Tq, Bengaluru-561204',
+        phone: '08027655241',
+        email: 'dbvangalabng@ksp.gov.in',
+        location: [13.2781, 77.5589],
+        officers: [
+          { name: 'Officer Q', casesSolved: 14, casesPending: 3, casesActive: 2 },
+          { name: 'Officer R', casesSolved: 7, casesPending: 2, casesActive: 4 }
+        ]
+      },
+      {
+        name: 'Hosakote',
+        address: 'NH4, Hosakote Town, Hosakote Tq, Bengaluru-562114',
+        phone: '08027931570',
+        email: 'hosakotebng@ksp.gov.in',
+        location: [13.0724, 77.7951],
+        officers: [
+          { name: 'Officer S', casesSolved: 10, casesPending: 3, casesActive: 1 },
+          { name: 'Officer T', casesSolved: 12, casesPending: 2, casesActive: 5 }
+        ]
+      }
+    ];
+
+    function showOfficers(stationName) {
+  const selectedStation = policeStations.find(station => station.name === stationName);
+  if (selectedStation) {
+    const officerDetails = selectedStation.officers.map(officer => `
+      <div class="officer-details">
+        <h6>${officer.name}</h6>
+        <p>Cases Solved: ${officer.casesSolved}</p>
+        <p>Cases Pending: ${officer.casesPending}</p>
+        <p>Cases Active: ${officer.casesActive}</p>
+      </div>
+    `).join('');
+    const policeStationList = document.getElementById('police-station-list');
+    policeStationList.innerHTML = officerDetails;
+    policeStationList.style.display = policeStationList.style.display === 'none'? 'block' : 'none';
+
+    const viewOfficersButton = document.querySelector(`button[onclick*="${stationName}"]`);
+    viewOfficersButton.addEventListener('click', () => {
+      policeStationList.style.display = policeStationList.style.display === 'none'? 'block' : 'none';
+    });
+  }
+}
+    
+    // Initialize map and add markers
+    const map = L.map('map').setView([12.9716, 77.5946], 12); // Default map center (Bangalore)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add markers for each police station
+    policeStations.forEach(station => {
+      const marker = L.marker(station.location).addTo(map);
+      marker.bindPopup(`<strong>${station.name}</strong>`);
+    });
+
+    // Populate police station list
+    const stationListContainer = document.getElementById('police-station-list');
+    policeStations.forEach(station => {
+      const card = `
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">${station.name}</h5>
+              <button class="btn btn-primary" onclick="showOfficers('${station.name}')">View Officers</button>
+            </div>
+          </div>
+        </div>
+      `;
+      stationListContainer.innerHTML += card;
+    });
+
+    // Show officers for selected police station
+    function showOfficers(stationName) {
+      const selectedStation = policeStations.find(station => station.name === stationName);
+      if (selectedStation) {
+        const officerDetails = selectedStation.officers.map(officer => `
+          <div class="officer-details">
+            <h6>${officer.name}</h6>
+            <p>Cases Solved: ${officer.casesSolved}</p>
+            <p>Cases Pending: ${officer.casesPending}</p>
+            <p>Cases Active: ${officer.casesActive}</p>
+          </div>
+        `).join('');
+        document.getElementById('police-station-list').innerHTML = officerDetails;
+      }
+    }
+
+    // Populate traffic congestion feedback list
+    const feedbackListContainer = document.getElementById('feedback-list');
+    feedbackData.forEach(feedback => {
+      const card = `
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">${feedback.location}</h5>
+              <p class="card-text">${feedback.feedback}</p>
+            </div>
+          </div>
+        </div>
+      `;
+      feedbackListContainer.innerHTML += card;
+    });
+  </script>
+</body>
+</html>

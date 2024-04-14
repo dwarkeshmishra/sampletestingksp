@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karnataka State Police Traffic Management - Feedback</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">KSP Traffic</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Feedback Form -->
+    <section class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">Feedback Form</div>
+                    <div class="card-body">
+                        <form id="feedback-form">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="area">Area</label>
+                                <input type="text" class="form-control" id="area" placeholder="Enter the name of the area" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="landmark">Landmark</label>
+                                <input type="text" class="form-control" id="landmark" placeholder="Enter any landmark (optional)">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea class="form-control" id="message" rows="5" placeholder="Enter your message" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="picture">Upload Picture</label>
+                                <input type="file" class="form-control-file" id="picture" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSGFpoO/ufreqqF6MVu4JdG7PhIxZlW8sSJv43gkdSHlua9DmM/" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoJtKh7z7lGz7fuP4F8nfdFvAOA6Gg/z6Y5J6XqqyGXYM2ntX5" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        // Submit feedback form
+        document.getElementById("feedback-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission for demonstration purposes
+
+            // Get form values
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var area = document.getElementById("area").value;
+            var landmark = document.getElementById("landmark").value;
+            var message = document.getElementById("message").value;
+            var picture = document.getElementById("picture").files[0]; // Get the file object
+
+            // Here, you can handle the submission of the form data,
+            // for example, sending it to a server for processing.
+            // For demonstration, we'll just log the values to the console.
+            console.log("Name:", name);
+            console.log("Email:", email);
+            console.log("Area:", area);
+            console.log("Landmark:", landmark);
+            console.log("Message:", message);
+            console.log("Picture:", picture); // File object
+
+            // Show a confirmation message
+            alert("Thank you for your feedback! We'll look into the issue.");
+            
+            // Reset the form
+            document.getElementById("feedback-form").reset();
+        });
+    </script>
+</body>
+</html>

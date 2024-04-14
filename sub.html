@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sub Inspector Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+ <style>
+     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+ 
+    header {
+            background: linear-gradient(to right, #333, #555);
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+    .logo {
+      max-height: 50px;
+      margin-right: 10px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .cctv-container {
+      width: 100%;
+      margin-bottom: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .ticket-table {
+      width: 100%;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2><img src="./Seal_of_Karnataka.svg.png" alt="" width="80px"> Karnataka State Police</h2>
+    <nav>
+        <ul>
+            <li><a href="./index.html"><i class="fas fa-home"></i> Home</li>
+
+            <li><a href="./login.html"><i class="fas fa-sign-out-alt"></i> Login</a></li>
+            <li><a href="./feedback.html"><i class="fas fa-list"></i> Feedback</a> </li>
+        </ul>
+    </nav>
+</header>
+
+  <!-- Main Content -->
+  <div class="container my-4">
+    <!-- CCTV Video -->
+    <div class="cctv-container">
+      <!-- Local MP4 video -->
+      <video width="100%" loop autoplay >
+        <source src="./output.webm" type="video/webm">
+       
+      </video>
+    </div>
+
+    <!-- Ticket Allocation Table -->
+    <div class="ticket-table">
+      <h2>Ticket Allocations</h2>
+      <table class="table">
+        <thead>
+            <tr>
+                <td>Silk Board Junction</td>
+                <td>10:00 AM</td>
+                <td>Kamal Haasan</td>
+                <td>PotHole</td>
+              </tr>
+              <tr>
+                <td>​​KR Puram Bridge</td>
+                <td>10:13 AM</td>
+                <td>Joseph Vijay</td>
+                <td>Illegal Parking</td>
+              </tr>
+              <tr>
+                <td>Bellandur Flyover</td>
+                <td>10:23 AM</td>
+                <td>Bob Johnson</td>
+                <td>Reckless Driving</td>
+              </tr>
+              <tr>
+                <td>Old Airport Road​</td>
+                <td>10:50 AM</td>
+                <td>V. L. Ethiraj</td>
+                <td>Reckless Driving</td>
+              </tr>
+              <tr>
+                <td>​Marathahalli Bridge</td>
+                <td>11:05 AM</td>
+                <td>V. M. Muralidharan</td>
+                <td>Illegal Parking</td>
+              </tr>
+              <tr>
+                <td>Bellandur Flyover</td>
+                <td>11:30 PM</td>
+                <td>Vallam Sundar,</td>
+                <td>PotHole</td>
+              </tr>
+              <tr>
+                <td>Silk Board Junction</td>
+                <td>12:00 PM</td>
+                <td>Subra Suresh</td>
+                <td>Illegal Parking</td>
+              </tr>
+              <tr>
+                <td>​​RK Puram Hanging Bridge</td>
+                <td>1:16 PM</td>
+                <td>S. Janaki</td>
+                <td>PotHole</td>
+              </tr>
+              <tr>
+                <td>​​Majestic (Kempegowda Bus Station)</td>
+                <td>2:21 PM</td>
+                <td>K.Balachander</td>
+                <td>Reckless Driving</td>
+              </tr>
+          <!-- Add more rows for ticket allocations here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
